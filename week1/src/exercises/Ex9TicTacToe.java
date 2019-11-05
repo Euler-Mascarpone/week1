@@ -31,14 +31,14 @@ public class Ex9TicTacToe {
 
         Player p1 = new Player("olle", 'X');
         Player p2 = new Player("fia", 'O');
-        Player actual;
+        Player actual; //The one whose turn it is?
         Player winner = null;
         char[] board = createBoard();  // alt. { EMPTY, EMPTY, ... }
 
         out.println("Welcome to Tic Tac Toe, board is ...");
         plotBoard(board);
 
-        if (rand.nextBoolean()) {
+        if (rand.nextBoolean()) { //Deciding who starts
             actual = p1;
         } else {
             actual = p2;
@@ -48,12 +48,32 @@ public class Ex9TicTacToe {
 
             // -- Input ----------
 
-            // --- Process ----------
+
+
+        // --- Process ----------
+        boolean winState = false;
+        int round = 1; //Current round
+        int markspot = -1; // Spot where mark is placed
+        while (!winState && round <= 9){ //While nobody has won
+            if (actual == p1){ //Changes player
+                actual = p2;
+            }else {
+                actual = p1;
+            }
+            markspot = getPlayerSelection(actual);
+            board[markspot] = actual.mark;
+            winState = hasWon(board,actual.mark); //Checks if player won
+            plotBoard(board);
+
+            round++;
+        }
 
             // -- Output --------
 
         // End game loop
-
+        if(winState){
+            winner = actual;
+        }
         out.println("Game over!");
         plotBoard(board);
 
@@ -128,5 +148,20 @@ public class Ex9TicTacToe {
         // TODO Tests
 
         exit(0);
+    }
+    boolean hasWon(char[] board,char mark){ //Checks if the player won
+        for(int i = 0;i < 3;i++){
+            if((mark == board[i] && mark == board[i+3] && mark == board[i+6])){ //If you have a column of three
+                return true;
+            }else if(mark == board[i] && mark == board[i+1] && mark == board[i+2]){ //If you have a row of three
+                return true;
+            }
+        }
+        if ((mark == board[0] && mark == board[4] && mark == board[8]) || (mark == board[2] && mark == board[4] && mark == board[6])){ //Checks if we have three in a row in diagonals
+            return true;
+        }else{
+            return false; //If none of the above, return false
+        }
+
     }
 }

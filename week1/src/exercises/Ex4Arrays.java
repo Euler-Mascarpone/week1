@@ -31,9 +31,10 @@ public class Ex4Arrays {
         //Input
 
         for(int i = 0; i < 5; i++ ){
-            arr[i]=sc.nextInt();
-            sc.nextLine();
+            arr[i]=sc.nextInt();        //Only have to input one time, the input is stored and used in every iteration of the loop
+
         }
+        sc.nextLine();
         out.println("Your array is " + Arrays.toString(arr));
         out.println("What number do you want to find?");
         int f = sc.nextInt();
