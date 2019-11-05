@@ -153,7 +153,7 @@ public class Ex9TicTacToe {
         for(int i = 0;i < 3;i++){
             if((mark == board[i] && mark == board[i+3] && mark == board[i+6])){ //If you have a column of three
                 return true;
-            }else if(mark == board[i] && mark == board[i+1] && mark == board[i+2]){ //If you have a row of three
+            }else if(mark == board[3*i] && mark == board[3*i+1] && mark == board[3*i+2]){ //If you have a row of three
                 return true;
             }
         }
